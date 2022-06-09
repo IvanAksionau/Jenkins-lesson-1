@@ -126,6 +126,3 @@ pipeline {
             echo 'in case of unstable be xececuted'
         }
 }
-
-
-
