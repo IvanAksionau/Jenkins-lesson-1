@@ -11,6 +11,8 @@ $ sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 $ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+$ sudo yum install java-1.8.0-openjdk
+$ sudo alternatives --config java    - to check java path
 $ sudo systemctl enable docker
 $ sudo systemctl start docker - to start docker service++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 $ sudo usermod -aG docker user_name -  to grant access of session(also logout to apply settings)
@@ -38,7 +40,7 @@ services:
     container_name: jenkins
     image: jenkins/jenkins
     ports:
-      - "8080:8080"
+      - "8080:8080"                                     -  "hostPort:containerPort"
       volumes:
         - "$PWD/jenkins_docker_home:/var/jenkins_home"
       networks:
@@ -51,6 +53,7 @@ $ sudo chown 1000:1000 jenkins_docker_home -R  - approve permissions to write to
 --------------------------------------------------------------
 Start Docker container: 
 $ docker-compose up -d    -to start container
+$ docker-compose down    -to stop container
 $ docker logs -f jenkins - get logs of container
 $ open jenkins host in browser http://192.168.100.6:8080/ (also you can difine host in C:\Windows\System32\drivers\etc\host
 $ docker-compose stop - to stop the container
@@ -62,9 +65,13 @@ We created a docker container(and 'container_name: jenkins' has Jenkins service 
 $ docker exec -ti jenkins bash (exit - to exit)
 $ docker cp script.sh jenkins:/tmp/script.sh    -  copy script.sh from container 'jenkins'
 $ docker system prune -a - will remove all stopped containers
+$ docker rmi -f $(docker images -aq) - To delete all the images
 
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.332.b09-1.el7_9.x86_64/jre/bin/java
 
 https://jenkinsci.github.io/job-dsl-plugin
+
+mvn clean test "-Dbrowserstack.user=ivanaksionau_T0Ca2z" "-Dbrowserstack.key=APV8uvviFmVAWhUg71iY" "-Demulator.location=remote"
 
 curl -u 'ivan_vOIhrM:qFr7kmY16GrsXyPhNwmN' -X POST 'https://api-cloud.browserstack.com/app-automate/upload' -F 'file=@C:\Users\ivan.aksionau\IdeaProjects\appium/src/main/resources/ApiDemos-debug.apk
 
