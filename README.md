@@ -1,3 +1,4 @@
+````
 - www.virtualbox.org - download and install Oracle VM virtualbox manager
 - https://www.centos.org/download/ - download centos
 - open OracleVMVirtualBox and create a new virtual machine based on centos iso
@@ -132,3 +133,4 @@ pipeline {
             echo 'in case of unstable be xececuted'
         }
 }
+````
